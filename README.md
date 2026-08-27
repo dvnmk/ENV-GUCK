@@ -2,17 +2,23 @@
 Environmental sensor monitoring via Web and ESP-NOW.
 
 ## C6-ENV-III-WEBSERVER
+![ENV-III](img/ENV-III.png)
+
 - ESP32-C6 + Env III Sensor 
 - Connected to WiFi, works as Webserver
 - Installed in workshop space
 - Used for monitoring remotely
+
 ![C6-ENV-III-WEBSERVER](img/C6-ENV-III-WEBSERVER.png)
 
 ## CARDPUTER-ENV-PRO-STANDALONE
+![CARDPUTER-ENV-PRO-STANDALONE](img/CARDPUTER-ENV-PRO-STANDALONE.png)
 - M5Stack Cardputer ADV + ENV PRO Sensor
 - Standalone operation without ESP32-C6
 
 ## C6-ENV-PRO-ESP-NOW-AP
+![ENV-PRO](img/ENV-PRO.png)
+
 - ESP32-C6 + ENV PRO Sensor
 - Works as an Access Point and Webserver
 - Transmits sensor values via ESP-NOW 
