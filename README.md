@@ -7,6 +7,10 @@ Environmental sensor monitoring via Web and ESP-NOW.
 - Installed in workshop space
 - Used for monitoring remotely
 
+## CARDPUTER-ENV-PRO-STANDALONE
+- M5Stack Cardputer ADV + ENV PRO Sensor
+- Standalone operation without ESP32-C6
+
 ## C6-ENV-PRO-ESP-NOW-AP
 - ESP32-C6 + ENV PRO Sensor
 - Works as an Access Point and Webserver
@@ -14,12 +18,8 @@ Environmental sensor monitoring via Web and ESP-NOW.
 - Installed in Automobile
 - Used for monitoring the environment during car living
 
-## CARDPUTER-ENV-PRO-STANDALONE
-- M5Stack Cardputer ADV + ENV PRO Sensor
-- Standalone operation without ESP32-C6
-
 ## CARDPUTER-ESP-NOW
-NanoC6 measures and calculates the 24-hour MIN/MAX; Cardputer receives that data, maintains its own 24-hour history, displays everything, handles keyboard control, and saves screenshots to microSD.
+C6-ENV-PRO-ESP-NOW-AP measures and calculates the 24-hour MIN/MAX; Cardputer receives that data, maintains its own 24-hour history, displays everything, handles keyboard control, and saves screenshots to microSD.
 
 - Cardputer ADV
 - Receives sensor data from ESP32-C6 via ESP-NOW
