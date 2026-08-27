@@ -18,17 +18,17 @@ Environmental sensor monitoring via Web and ESP-NOW.
 
 ## 3. C6-ENV-PRO-ESP-NOW-AP
 ![ENV-PRO](img/ENV-PRO.png)
+```text
+                         ┌── Wi-Fi ─► Web Browser
+NanoC6 + ENV PRO ────────┤
+                         └── ESP-NOW ─► Cardputer
+```
 
 - ESP32-C6 + ENV PRO Sensor
 - Works as an Access Point and Webserver
 - Transmits sensor values via ESP-NOW 
 - Installed in Automobile
 - Used for monitoring the environment during car living
-```text
-                         ┌── Wi-Fi → Web Browser
-NanoC6 + ENV PRO ────────┤
-                         └── ESP-NOW → Cardputer
-```
 
 ## 4. CARDPUTER-ESP-NOW
 C6-ENV-PRO-ESP-NOW-AP measures and calculates the 24-hour MIN/MAX; Cardputer receives that data, maintains its own 24-hour history, displays everything, handles keyboard control, and saves screenshots to microSD.
