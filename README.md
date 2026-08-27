@@ -17,6 +17,11 @@ Environmental sensor monitoring via Web and ESP-NOW.
 - Transmits sensor values via ESP-NOW 
 - Installed in Automobile
 - Used for monitoring the environment during car living
+```text
+                         ┌── Wi-Fi → Web Browser
+NanoC6 + ENV PRO ────────┤
+                         └── ESP-NOW → Cardputer
+```
 
 ## CARDPUTER-ESP-NOW
 C6-ENV-PRO-ESP-NOW-AP measures and calculates the 24-hour MIN/MAX; Cardputer receives that data, maintains its own 24-hour history, displays everything, handles keyboard control, and saves screenshots to microSD.
@@ -42,8 +47,7 @@ C6-ENV-PRO-ESP-NOW-AP measures and calculates the 24-hour MIN/MAX; Cardputer rec
 | `R` | Cycle history interval: 10s / 30s / 60s |
 | `Fn + S` | Save screenshot to microSD |
 
-### History
-
+### History Interval
 - `10s` — approximately 4 hours
 - `30s` — approximately 12 hours
 - `60s` — approximately 24 hours
@@ -53,10 +57,6 @@ C6-ENV-PRO-ESP-NOW-AP measures and calculates the 24-hour MIN/MAX; Cardputer rec
 
 ## System Overview
 ```text
-                    ENV-GUCK SYSTEM
-         Environmental Monitoring via ESP-NOW
-
-
  ┌─────────────────────┐                       ┌──────────────────────────┐
  │       NanoC6        │                       │      CARDPUTER ADV       │
  │                     │                       │                          │
@@ -69,25 +69,24 @@ C6-ENV-PRO-ESP-NOW-AP measures and calculates the 24-hour MIN/MAX; Cardputer rec
  │ I  IAQ              │                       │     └───────┬──────┘     │
  │                     │                       │             │            │
  │ 24H MIN / MAX       │                       │       ┌─────┴─────┐      │
- └─────────────────────┘                       │       ▼           ▼      │
-                                               │   MIN / MAX    HISTORY   │
-                                               │   NanoC6        Local    │
-                                               │                   │      │
-                                               │                   ▼      │
-                                               │              1440 points │
-                                               │               ≈ 24 hours │
-                                               │                          │
-                                               │     ┌────────────────┐   │
-                                               │     │    DISPLAY     │   │
-                                               │     │                │   │
-                                               │     │  1 ENV PRO     │   │
-                                               │     │  2 MIN/MAX     │   │
-                                               │     │  3 HISTORY     │   │
-                                               │     │  4 CONTROL     │   │
+ └──────────┬──────────┘                       │       ▼           ▼      │
+            │                                  │   MIN / MAX    HISTORY   │
+            │ Wi-Fi                            │   NanoC6        Local    │
+            │                                  │                   │      │
+            ▼                                  │                   ▼      │
+ ┌─────────────────────┐                       │              1440 points │
+ │   ACCESS POINT      │                       │               ≈ 24 hours │
+ │     + WEB SERVER    │                       │                          │
+ │                     │                       │     ┌────────────────┐   │
+ │  Remote monitoring  │                       │     │    DISPLAY     │   │
+ │  via web browser    │                       │     │                │   │
+ │                     │                       │     │  1 ENV PRO     │   │
+ │  Sensor values      │                       │     │  2 MIN/MAX     │   │
+ │  Environment data   │                       │     │  3 HISTORY     │   │
+ └─────────────────────┘                       │     │  4 CONTROL     │   │
                                                │     └────────────────┘   │
                                                └──────────────────────────┘
 ```
-
 ## License
 
 [MIT](LICENSE)
