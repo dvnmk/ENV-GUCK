@@ -52,58 +52,40 @@ NanoC6 measures and calculates the 24-hour MIN/MAX; Cardputer receives that data
 - 24HR MIN/MAX values are received directly from the NanoC6.
 
 ## System Overview
-
 ```text
-                         ENV-GUCK SYSTEM
-              Environmental Monitoring via ESP-NOW
+                    ENV-GUCK SYSTEM
+         Environmental Monitoring via ESP-NOW
 
-    ┌──────────────────────┐
-    │       NanoC6         │
-    │   ESP32-C6 + ENV PRO │
-    │                      │
-    │  Temperature         │
-    │  Humidity            │
-    │  Pressure            │
-    │  Gas Resistance      │
-    │  IAQ                 │
-    │                      │
-    │  24H MIN / MAX       │
-    └──────────┬───────────┘
-               │
-               │ ESP-NOW
-               │ sensorPayload
-               ▼
-    ┌──────────────────────────────┐
-    │       CARDPUTER ADV          │
-    │                              │
-    │      ESP-NOW RECEIVER        │
-    │              │               │
-    │              ▼               │
-    │     ┌──────────────────┐     │
-    │     │ Latest Data      │     │
-    │     │                  │     │
-    │     │ T / H / P / GAS  │     │
-    │     │ IAQ              │     │
-    │     └────────┬─────────┘     │
-    │              │               │
-    │       ┌──────┴──────┐        │
-    │       ▼             ▼        │
-    │   MIN / MAX      HISTORY     │
-    │   from NanoC6    local       │
-    │                     │        │
-    │                     ▼        │
-    │                 1440 points  │
-    │                 ≈ 24 hours   │
-    │                              │
-    │     ┌──────────────────┐     │
-    │     │     DISPLAY      │     │
-    │     │                  │     │
-    │     │  1 ENV PRO       │     │
-    │     │  2 MIN/MAX       │     │
-    │     │  3 HISTORY       │     │
-    │     │  4 CONTROL       │     │
-    │     └──────────────────┘     │
-    └──────────────────────────────┘
+
+ ┌─────────────────────┐                       ┌──────────────────────────┐
+ │       NanoC6        │                       │      CARDPUTER ADV       │
+ │                     │                       │                          │
+ │ ESP32-C6 + ENV PRO  │                       │    ESP-NOW RECEIVER      │
+ │                     │                       │            │             │
+ │ T  Temperature      │                       │            ▼             │
+ │ H  Humidity         │      ESP-NOW          │     ┌──────────────┐     │
+ │ P  Pressure         │ ────────────────────► │     │  Latest Data │     │
+ │ G  Gas Resistance   │    sensorPayload      │     │ T/H/P/G/IAQ  │     │
+ │ I  IAQ              │                       │     └───────┬──────┘     │
+ │                     │                       │             │            │
+ │ 24H MIN / MAX       │                       │       ┌─────┴─────┐      │
+ └─────────────────────┘                       │       ▼           ▼      │
+                                               │   MIN / MAX    HISTORY   │
+                                               │   NanoC6        Local    │
+                                               │                   │      │
+                                               │                   ▼      │
+                                               │              1440 points │
+                                               │               ≈ 24 hours │
+                                               │                          │
+                                               │     ┌────────────────┐   │
+                                               │     │    DISPLAY     │   │
+                                               │     │                │   │
+                                               │     │  1 ENV PRO     │   │
+                                               │     │  2 MIN/MAX     │   │
+                                               │     │  3 HISTORY     │   │
+                                               │     │  4 CONTROL     │   │
+                                               │     └────────────────┘   │
+                                               └──────────────────────────┘
 ```
 
 ## License
