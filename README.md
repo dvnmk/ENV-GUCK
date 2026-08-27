@@ -31,7 +31,7 @@ NanoC6 + ENV PRO ────────┤
 - Used for monitoring the environment during car living
 
 ## 4. CARDPUTER-ESP-NOW
-C6-ENV-PRO-ESP-NOW-AP measures and calculates the 24-hour MIN/MAX; Cardputer receives that data, maintains its own 24-hour history, displays everything, handles keyboard control, and saves screenshots to microSD.
+C6-ENV-PRO-ESP-NOW-AP measures and calculates the 24-hour MIN/MAX. Cardputer receives that data, maintains its own 24-hour history, displays everything, handles keyboard control, and saves screenshots to microSD.
 
 - Cardputer ADV
 - Receives sensor data from ESP32-C6 via ESP-NOW
