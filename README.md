@@ -65,7 +65,7 @@ C6-ENV-PRO-ESP-NOW-AP measures and calculates the 24-hour MIN/MAX; Cardputer rec
 - History is stored locally on the Cardputer.
 - 24HR MIN/MAX values are received directly from the NanoC6.
 
-## System Overview
+### System Overview
 ```text
  ┌─────────────────────┐                       ┌──────────────────────────┐
  │       NanoC6        │                       │      CARDPUTER ADV       │
