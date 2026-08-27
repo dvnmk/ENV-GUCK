@@ -102,29 +102,7 @@ NanoC6 measures and calculates the 24-hour MIN/MAX; Cardputer receives that data
     │     │  2 MIN/MAX       │     │
     │     │  3 HISTORY       │     │
     │     │  4 CONTROL       │     │
-    │     └────────┬─────────┘     │
-    │              │               │
-    │              ▼               │
-    │          KEYBOARD            │
-    │                              │
-    │  1  ENV PRO                  │
-    │  2  MIN/MAX                  │
-    │  3  HISTORY                  │
-    │  4  CONTROL                  │
-    │  N  Next page                │
-    │  B  Brightness               │
-    │  T  Temperature              │
-    │  H  Humidity                 │
-    │  P  Pressure                 │
-    │  G  Gas                      │
-    │  I  IAQ                      │
-    │  R  History interval         │
-    │  Fn+S  Screenshot            │
-    │                              │
-    │              │               │
-    │              ▼               │
-    │          microSD             │
-    │          shotXXX.bmp         │
+    │     └──────────────────┘     │
     └──────────────────────────────┘
 ```
 
