@@ -19,9 +19,9 @@ Environmental sensor monitoring via Web and ESP-NOW.
 ## 3. C6-ENV-PRO-ESP-NOW-AP
 ![ENV-PRO](img/ENV-PRO.png)
 ```text
-                         ┌── Wi-Fi ─► Web Browser
+                         ┌── Wi-Fi → Web Browser
 NanoC6 + ENV PRO ────────┤
-                         └── ESP-NOW ─► Cardputer
+                         └── ESP-NOW → Cardputer
 ```
 
 - ESP32-C6 + ENV PRO Sensor
