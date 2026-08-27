@@ -9,7 +9,7 @@ Environmental sensor monitoring via Web and ESP-NOW.
 - Installed in workshop space
 - Used for monitoring remotely
 
-![C6-ENV-III-WEBSERVER](img/C6-ENV-III-WEBSERVER.png)
+![C6-ENV-III-WEBSERVER](img/ENV3-safari.png)
 
 ## CARDPUTER-ENV-PRO-STANDALONE
 ![CARDPUTER-ENV-PRO-STANDALONE](img/CARDPUTER-ENV-PRO-STANDALONE.png)
