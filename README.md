@@ -8,8 +8,8 @@ Environmental sensor monitoring via Web and ESP-NOW.
 - Used for monitoring remotely
 
 ## C6-ENV-PRO-ESP-NOW-AP
-- ESP32-C6 + Env Pro Sensor
-- Works as an Access Point and web server
+- ESP32-C6 + ENV PRO Sensor
+- Works as an Access Point and Webserver
 - Transmits sensor values via ESP-NOW 
 - Installed in Automobile
 - Used for monitoring the environment during car living
@@ -22,8 +22,8 @@ Environmental sensor monitoring via Web and ESP-NOW.
 NanoC6 measures and calculates the 24-hour MIN/MAX; Cardputer receives that data, maintains its own 24-hour history, displays everything, handles keyboard control, and saves screenshots to microSD.
 
 - Cardputer ADV
-- Receves sensor data from ESP32-C6 via ESP-NOW
-- Using in the automobile
+- Receives sensor data from ESP32-C6 via ESP-NOW
+- Used in the automobile
 
 ### Keys
 | Key | Function |
@@ -51,7 +51,6 @@ NanoC6 measures and calculates the 24-hour MIN/MAX; Cardputer receives that data
 - History is stored locally on the Cardputer.
 - 24HR MIN/MAX values are received directly from the NanoC6.
 
-### System
 ## System Overview
 
 ```text
@@ -128,4 +127,8 @@ NanoC6 measures and calculates the 24-hour MIN/MAX; Cardputer receives that data
     │          shotXXX.bmp         │
     └──────────────────────────────┘
 ```
+
+## License
+
+[MIT](LICENSE)
 
