@@ -1,7 +1,7 @@
 # ENV-GUCK
 Environmental sensor monitoring via Web and ESP-NOW.
 
-## C6-ENV-III-WEBSERVER
+## 1. C6-ENV-III-WEBSERVER
 ![ENV-III](img/ENV-III.png)
 
 - ESP32-C6 + Env III Sensor 
@@ -11,12 +11,12 @@ Environmental sensor monitoring via Web and ESP-NOW.
 
 ![C6-ENV-III-WEBSERVER](img/ENV3-safari.png)
 
-## CARDPUTER-ENV-PRO-STANDALONE
+## 2. CARDPUTER-ENV-PRO-STANDALONE
 ![CARDPUTER-ENV-PRO-STANDALONE](img/CARDPUTER-ENV-PRO-STANDALONE.png)
 - M5Stack Cardputer ADV + ENV PRO Sensor
 - Standalone operation without ESP32-C6
 
-## C6-ENV-PRO-ESP-NOW-AP
+## 3. C6-ENV-PRO-ESP-NOW-AP
 ![ENV-PRO](img/ENV-PRO.png)
 
 - ESP32-C6 + ENV PRO Sensor
@@ -30,7 +30,7 @@ NanoC6 + ENV PRO ────────┤
                          └── ESP-NOW → Cardputer
 ```
 
-## CARDPUTER-ESP-NOW
+## 4. CARDPUTER-ESP-NOW
 C6-ENV-PRO-ESP-NOW-AP measures and calculates the 24-hour MIN/MAX; Cardputer receives that data, maintains its own 24-hour history, displays everything, handles keyboard control, and saves screenshots to microSD.
 
 - Cardputer ADV
