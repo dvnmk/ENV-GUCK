@@ -26,7 +26,7 @@ uint32_t lastWiFiRetry = 0;
 uint32_t lastDiagnostic = 0;
 uint32_t statsStart = 0;
 
-// One sample per minute for 24 hours.  The four arrays use about 23 KB total.
+// One sample per minute for 24 hours. The four arrays use about 23 KB total.
 const int HISTORY_SIZE = 1440;
 float tempHistory[HISTORY_SIZE];
 float humHistory[HISTORY_SIZE];
@@ -66,17 +66,6 @@ void storeHistory() {
   if (historyCount < HISTORY_SIZE) historyCount++;
 }
 
-// Send a number without allocating a String.
-void sendNumber(float value) {
-  char buffer[24];
-  if (isnan(value)) {
-    server.sendContent("null");
-  } else {
-    snprintf(buffer, sizeof(buffer), "%.2f", value);
-    server.sendContent(buffer);
-  }
-}
-
 void numberToText(float value, char* buffer, size_t bufferSize) {
   if (isnan(value)) {
     snprintf(buffer, bufferSize, "null");
@@ -85,31 +74,77 @@ void numberToText(float value, char* buffer, size_t bufferSize) {
   }
 }
 
-void sendHistoryArray(const float* values) {
-  for (int i = 0; i < historyCount; ++i) {
-    const int index = (historyIndex - historyCount + i + HISTORY_SIZE) % HISTORY_SIZE;
-    if (i) server.sendContent(",");
-    sendNumber(values[index]);
-  }
-}
+// Sends about 1 KB per write instead of one write for every number and comma.
+// This retains low RAM use while making /api/history much faster.
+class JsonChunkWriter {
+ public:
+  JsonChunkWriter() : used(0) {}
 
-// Important: stream the response.  Do not build a 40+ KB String in RAM.
+  void append(const char* text) {
+    append(text, strlen(text));
+  }
+
+  void append(char character) {
+    if (used == sizeof(buffer)) flush();
+    buffer[used++] = character;
+  }
+
+  void appendNumber(float value) {
+    char number[24];
+    numberToText(value, number, sizeof(number));
+    append(number);
+  }
+
+  void writeHistoryArray(const float* values) {
+    for (int i = 0; i < historyCount; ++i) {
+      const int index = (historyIndex - historyCount + i + HISTORY_SIZE) % HISTORY_SIZE;
+      if (i) append(',');
+      appendNumber(values[index]);
+    }
+  }
+
+  void flush() {
+    if (used == 0) return;
+    server.sendContent(buffer, used);
+    used = 0;
+  }
+
+ private:
+  char buffer[1024];
+  size_t used;
+
+  void append(const char* text, size_t length) {
+    while (length > 0) {
+      const size_t available = sizeof(buffer) - used;
+      const size_t copyLength = length < available ? length : available;
+      memcpy(buffer + used, text, copyLength);
+      used += copyLength;
+      text += copyLength;
+      length -= copyLength;
+      if (used == sizeof(buffer)) flush();
+    }
+  }
+};
+
 void handleHistory() {
   server.setContentLength(CONTENT_LENGTH_UNKNOWN);
   server.send(200, "application/json", "");
-  server.sendContent("{\"temperature\":[");
-  sendHistoryArray(tempHistory);
-  server.sendContent("],\"humidity\":[");
-  sendHistoryArray(humHistory);
-  server.sendContent("],\"pressure\":[");
-  sendHistoryArray(pressHistory);
-  server.sendContent("],\"altitude\":[");
-  sendHistoryArray(altHistory);
-  server.sendContent("]}");
+
+  JsonChunkWriter writer;
+  writer.append("{\"temperature\":[");
+  writer.writeHistoryArray(tempHistory);
+  writer.append("],\"humidity\":[");
+  writer.writeHistoryArray(humHistory);
+  writer.append("],\"pressure\":[");
+  writer.writeHistoryArray(pressHistory);
+  writer.append("],\"altitude\":[");
+  writer.writeHistoryArray(altHistory);
+  writer.append("]}");
+  writer.flush();
+  server.sendContent("");  // Finish the chunked HTTP response.
 }
 
 void handleReadings() {
-  // Small response, so a fixed stack buffer is simpler and allocation-free.
   char json[512];
   char t[16], h[16], p[16], a[16], tmin[16], tmax[16], hmin[16], hmax[16];
   char pmin[16], pmax[16], amin[16], amax[16];
@@ -202,7 +237,7 @@ void loop() {
   if (now - lastSensorUpdate >= SENSOR_INTERVAL) {
     lastSensorUpdate = now;
     if (sht3x.update()) { temperature = sht3x.cTemp; humidity = sht3x.humidity; }
-    if (qmp.update())   { pressure = qmp.pressure; altitude = qmp.altitude; }
+    if (qmp.update()) { pressure = qmp.pressure; altitude = qmp.altitude; }
     updateStats();
   }
   if (now - lastHistoryUpdate >= HISTORY_INTERVAL) {
@@ -212,6 +247,6 @@ void loop() {
   if (now - statsStart >= STATS_INTERVAL) resetStats();
   if (now - lastDiagnostic >= DIAGNOSTIC_INTERVAL) {
     lastDiagnostic = now;
-    Serial.printf("WiFi=%d heap=%u minHeap=%u samples=%d\\n", WiFi.status(), ESP.getFreeHeap(), ESP.getMinFreeHeap(), historyCount);
+    Serial.printf("WiFi=%d heap=%u minHeap=%u samples=%d\n", WiFi.status(), ESP.getFreeHeap(), ESP.getMinFreeHeap(), historyCount);
   }
 }
