@@ -18,6 +18,8 @@ Environmental sensor monitoring via Web and ESP-NOW.
 
 ## 3. C6-ENV-PRO-ESP-NOW-AP
 ![ENV-PRO](img/ENV-PRO.png)
+![ENV-PRO-lego](img/env-pro-lego.png)
+
 ```text
                          ┌── Wi-Fi → Web Browser
 NanoC6 + ENV PRO ────────┤
